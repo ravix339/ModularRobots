@@ -18,7 +18,7 @@ This method simplifies the input process for change_to_desired_form() by taking 
 This method takes in a 2D square matrix (of 1s and 0s since this is ideally to be used with progressions) creates a version of the input that is easier to read the results for. Empty spaces become '.'s and where 4x4 modules are, there is a '0'. 
 
 #### display()
-This method takes in a 2D square matrix (of 1s and 0s since this is ideally to be used with progressions) and prints it to the screen.
+This method takes in a 2D square matrix (of 1s and 0s since this is ideally to be used with progressions) and prints it to the screen using the convert_to_out() method.
 
 ## Example Code
 The driver.py file contains example code which both displays the progressions and writes each to a file labeled by its timestamp. There are multiple example lists that can be uncommented to test.
