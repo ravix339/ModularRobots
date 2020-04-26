@@ -1,13 +1,49 @@
 from typing import List
 
 class ModRobot: 
+    #
+    #
+    # Public Methods
+    #
+    #
+
     def __init__(self, blocksize = 8):
         self.BLOCKSIZE = blocksize
 
     #Main function to call to get states
-    def changeToDesiredForm(self, structure : List[List[int]]) -> (List[List[int]], List[List[List[int]]]):
+    def change_to_desired_form(self, structure : List[List[int]]) -> (List[List[int]], List[List[List[int]]]):
         _, _, progressions = self.__changeToDesiredForm_helper(structure)
         return (progressions[-1], progressions)
+
+    def block_32_to_basic(self, lst : List[List[int]]) -> List[List[int]]:
+        n = len(lst) * self.BLOCKSIZE
+        ret = [[0 for _ in range(n)] for _ in range(n)]
+        for row in range(len(lst)):
+            for col in range(len(lst[0])):
+                if lst[row][col] == 1:
+                    for i in range(self.BLOCKSIZE):
+                        for j in range(self.BLOCKSIZE):
+                            ret[row*self.BLOCKSIZE+i][col*self.BLOCKSIZE+j] = 1
+        return ret
+
+    def display(self, lst : List[List[int]]) -> None :
+        for row in self.convert_to_out(lst):
+            print(row)
+    
+    def convert_to_out(self, lst : List[List[int]]) -> List[str]:
+        n = len(lst)
+        ret = [[False for _ in range(n)] for _ in range(n)]
+        for row in range(n):
+            for col in range(n):
+                ret[row][col] = '0' if lst[row][col] == 1 else '.'
+        return ["".join(row) for row in ret]
+
+
+    #
+    #
+    # Helper Functions
+    #
+    #
 
     #Helper that deals with recursive calls
     def __changeToDesiredForm_helper(self, structure : List[List[int]], depth=0) -> (int, bool, List[List[List[int]]]):
@@ -113,9 +149,7 @@ class ModRobot:
         return (total, False, progressions)
 
     #
-    #
     # Fill Functionality
-    #
     #
 
     #Fill a structure with a full ring
@@ -306,9 +340,7 @@ class ModRobot:
         return copy
 
     #
-    #
     # Backbone Functionality
-    #
     #
 
     #Determine if there is a backbone in a structure
@@ -387,9 +419,7 @@ class ModRobot:
         return cur_indices
 
     #
-    #
     # Merge Functionality
-    #
     #
 
     #Merge quadrants into a singular list
@@ -407,33 +437,3 @@ class ModRobot:
                 elif row >= n//2 and column >= n//2: #south east
                     retStructure[row][column] = se[row - n//2][column - n//2]
         return retStructure
-
-
-    #
-    #
-    # Helper functions
-    #
-    #
-
-    def block_32_to_basic(self, lst : List[List[int]]) -> List[List[int]]:
-        n = len(lst) * self.BLOCKSIZE
-        ret = [[0 for _ in range(n)] for _ in range(n)]
-        for row in range(len(lst)):
-            for col in range(len(lst[0])):
-                if lst[row][col] == 1:
-                    for i in range(self.BLOCKSIZE):
-                        for j in range(self.BLOCKSIZE):
-                            ret[row*self.BLOCKSIZE+i][col*self.BLOCKSIZE+j] = 1
-        return ret
-
-    def display(self, lst : List[List[int]]) -> None :
-        for row in self.convert2out(lst):
-            print(row)
-    
-    def convert2out(self, lst : List[List[int]]) -> List[str]:
-        n = len(lst)
-        ret = [[False for _ in range(n)] for _ in range(n)]
-        for row in range(n):
-            for col in range(n):
-                ret[row][col] = '0' if lst[row][col] == 1 else '.'
-        return ["".join(row) for row in ret]
