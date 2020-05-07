@@ -1,8 +1,8 @@
-from modrobots import ModRobot
+from logn import LogNReconfig
 
 BLOCKSIZE = 8 #number of 4x4 modules in a block
 
-analyzer = ModRobot(BLOCKSIZE)
+analyzer = LogNReconfig(BLOCKSIZE)
 
 # highLevelStruct = [
 #     [1,1,1,1],

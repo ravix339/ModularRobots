@@ -1,6 +1,6 @@
 from typing import List
 
-class ModRobot: 
+class LogNReconfig: 
     #
     #
     # Public Methods
